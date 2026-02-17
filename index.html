@@ -3,142 +3,536 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>ぶぶ / BuBu - AI Illust Portfolio</title>
-  <meta name="description" content="AI画像・動画クリエイター ぶぶ(BuBu)のポートフォリオサイト">
-  <link rel="stylesheet" href="style.css">
+  <title>ぶぶ / BuBu - Portfolio Variants</title>
+  <meta name="description" content="AI画像・動画クリエイター ぶぶ(BuBu)のポートフォリオ - レイアウトバリエーション">
+  <style>
+    :root {
+      --bg-primary: #0a0a0f;
+      --bg-secondary: #12121a;
+      --bg-card: #1a1a2e;
+      --cyan: #00f0ff;
+      --magenta: #ff00e5;
+      --purple: #b000ff;
+      --text-primary: #e0e0e0;
+      --text-secondary: #8888aa;
+      --glow-cyan: 0 0 10px rgba(0, 240, 255, 0.5), 0 0 30px rgba(0, 240, 255, 0.2);
+      --font-main: 'Segoe UI', 'Noto Sans JP', sans-serif;
+    }
+
+    *, *::before, *::after {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: var(--font-main);
+      background: var(--bg-primary);
+      color: var(--text-primary);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      overflow-x: hidden;
+    }
+
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background:
+        radial-gradient(ellipse at 20% 30%, rgba(0, 240, 255, 0.06) 0%, transparent 50%),
+        radial-gradient(ellipse at 80% 70%, rgba(255, 0, 229, 0.05) 0%, transparent 50%);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .page {
+      position: relative;
+      z-index: 1;
+      width: 100%;
+      max-width: 1000px;
+      padding: 60px 24px;
+    }
+
+    /* Header */
+    .header {
+      text-align: center;
+      margin-bottom: 60px;
+    }
+
+    .logo {
+      font-size: 2.2rem;
+      font-weight: 800;
+      background: linear-gradient(135deg, var(--cyan), var(--purple), var(--magenta));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      animation: glow-pulse 3s ease-in-out infinite alternate;
+    }
+
+    @keyframes glow-pulse {
+      from { filter: drop-shadow(0 0 8px rgba(0, 240, 255, 0.4)); }
+      to   { filter: drop-shadow(0 0 20px rgba(255, 0, 229, 0.4)); }
+    }
+
+    .subtitle {
+      color: var(--text-secondary);
+      font-size: 1rem;
+      margin-top: 12px;
+      letter-spacing: 0.1em;
+    }
+
+    /* Cards Grid */
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 24px;
+    }
+
+    .card {
+      background: var(--bg-card);
+      border: 1px solid rgba(0, 240, 255, 0.1);
+      border-radius: 12px;
+      padding: 32px 28px;
+      transition: transform 0.3s, box-shadow 0.3s, border-color 0.3s;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .card:hover {
+      transform: translateY(-6px);
+      box-shadow: var(--glow-cyan);
+      border-color: rgba(0, 240, 255, 0.3);
+    }
+
+    .card-badge {
+      display: inline-block;
+      padding: 4px 12px;
+      border-radius: 20px;
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.05em;
+      margin-bottom: 16px;
+      width: fit-content;
+    }
+
+    .card:nth-child(1) .card-badge {
+      background: rgba(0, 240, 255, 0.15);
+      color: var(--cyan);
+      border: 1px solid rgba(0, 240, 255, 0.3);
+    }
+
+    .card:nth-child(2) .card-badge {
+      background: rgba(176, 0, 255, 0.15);
+      color: var(--purple);
+      border: 1px solid rgba(176, 0, 255, 0.3);
+    }
+
+    .card:nth-child(3) .card-badge {
+      background: rgba(255, 0, 229, 0.15);
+      color: var(--magenta);
+      border: 1px solid rgba(255, 0, 229, 0.3);
+    }
+
+    .card-title {
+      font-size: 1.3rem;
+      font-weight: 700;
+      color: #fff;
+      margin-bottom: 12px;
+    }
+
+    .card-desc {
+      color: var(--text-secondary);
+      font-size: 0.9rem;
+      line-height: 1.7;
+      flex: 1;
+      margin-bottom: 24px;
+    }
+
+    .card-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 24px;
+      border-radius: 6px;
+      font-size: 0.9rem;
+      font-weight: 600;
+      text-decoration: none;
+      transition: transform 0.2s, box-shadow 0.3s;
+      width: fit-content;
+    }
+
+    .card:nth-child(1) .card-link {
+      background: linear-gradient(135deg, var(--cyan), #0080ff);
+      color: #000;
+    }
+
+    .card:nth-child(2) .card-link {
+      background: linear-gradient(135deg, var(--purple), #6000cc);
+      color: #fff;
+    }
+
+    .card:nth-child(3) .card-link {
+      background: linear-gradient(135deg, var(--magenta), #cc0099);
+      color: #fff;
+    }
+
+    .card-link:hover {
+      transform: translateY(-2px);
+      box-shadow: var(--glow-cyan);
+      color: inherit;
+      text-shadow: none;
+    }
+
+    .card-link svg {
+      width: 16px;
+      height: 16px;
+    }
+
+    /* Preview mockup */
+    .card-preview {
+      height: 140px;
+      border-radius: 8px;
+      margin-bottom: 20px;
+      overflow: hidden;
+      border: 1px solid rgba(0, 240, 255, 0.08);
+      position: relative;
+    }
+
+    /* v1 preview: standard centered layout */
+    .preview-v1 {
+      background: var(--bg-primary);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+    }
+
+    .preview-v1 .mock-nav {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 16px;
+      background: var(--bg-secondary);
+      border-bottom: 1px solid rgba(0, 240, 255, 0.1);
+    }
+
+    .preview-v1 .mock-title {
+      width: 60px;
+      height: 8px;
+      background: linear-gradient(90deg, var(--cyan), var(--magenta));
+      border-radius: 4px;
+    }
+
+    .preview-v1 .mock-text {
+      width: 80px;
+      height: 4px;
+      background: rgba(136, 136, 170, 0.3);
+      border-radius: 2px;
+    }
+
+    .preview-v1 .mock-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 4px;
+      margin-top: 4px;
+    }
+
+    .preview-v1 .mock-cell {
+      width: 20px;
+      height: 20px;
+      background: var(--bg-card);
+      border-radius: 2px;
+    }
+
+    /* v2 preview: sidebar layout */
+    .preview-v2 {
+      background: var(--bg-primary);
+      display: flex;
+    }
+
+    .preview-v2 .mock-sidebar {
+      width: 40px;
+      height: 100%;
+      background: var(--bg-secondary);
+      border-right: 1px solid rgba(0, 240, 255, 0.1);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding-top: 12px;
+      gap: 6px;
+    }
+
+    .preview-v2 .mock-sidebar-dot {
+      width: 8px;
+      height: 3px;
+      background: rgba(176, 0, 255, 0.5);
+      border-radius: 2px;
+    }
+
+    .preview-v2 .mock-content {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      padding: 12px;
+      gap: 6px;
+    }
+
+    .preview-v2 .mock-title {
+      width: 50px;
+      height: 6px;
+      background: linear-gradient(90deg, var(--cyan), var(--purple));
+      border-radius: 3px;
+    }
+
+    .preview-v2 .mock-masonry {
+      display: flex;
+      gap: 4px;
+      flex: 1;
+    }
+
+    .preview-v2 .mock-col {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .preview-v2 .mock-block {
+      background: var(--bg-card);
+      border-radius: 2px;
+      flex: 1;
+    }
+
+    .preview-v2 .mock-block.tall {
+      flex: 1.5;
+    }
+
+    /* v3 preview: fullscreen sections */
+    .preview-v3 {
+      background: var(--bg-primary);
+      display: flex;
+      flex-direction: column;
+    }
+
+    .preview-v3 .mock-section {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-bottom: 1px solid rgba(255, 0, 229, 0.15);
+    }
+
+    .preview-v3 .mock-section:last-child {
+      border-bottom: none;
+    }
+
+    .preview-v3 .mock-section:nth-child(2) {
+      background: var(--bg-secondary);
+    }
+
+    .preview-v3 .mock-circle {
+      width: 24px;
+      height: 6px;
+      background: linear-gradient(90deg, var(--cyan), var(--magenta));
+      border-radius: 3px;
+    }
+
+    .preview-v3 .mock-carousel {
+      display: flex;
+      gap: 3px;
+    }
+
+    .preview-v3 .mock-carousel-item {
+      width: 14px;
+      height: 14px;
+      background: var(--bg-card);
+      border-radius: 2px;
+    }
+
+    .preview-v3 .mock-dots {
+      position: absolute;
+      right: 8px;
+      top: 50%;
+      transform: translateY(-50%);
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .preview-v3 .mock-dot {
+      width: 5px;
+      height: 5px;
+      border-radius: 50%;
+      border: 1px solid var(--magenta);
+      background: transparent;
+    }
+
+    .preview-v3 .mock-dot.filled {
+      background: var(--magenta);
+    }
+
+    /* Footer */
+    .page-footer {
+      text-align: center;
+      margin-top: 60px;
+      padding-top: 24px;
+      border-top: 1px solid rgba(0, 240, 255, 0.08);
+    }
+
+    .page-footer a {
+      color: var(--text-secondary);
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 0.9rem;
+      transition: color 0.3s;
+    }
+
+    .page-footer a:hover {
+      color: var(--cyan);
+    }
+
+    .page-footer svg {
+      width: 18px;
+      height: 18px;
+    }
+
+    .footer-copy {
+      color: var(--text-secondary);
+      font-size: 0.75rem;
+      margin-top: 12px;
+      opacity: 0.5;
+    }
+
+    @media (max-width: 600px) {
+      .page {
+        padding: 40px 16px;
+      }
+
+      .cards {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
 </head>
 <body>
 
-  <!-- Header -->
-  <header class="header">
-    <div class="container">
-      <span class="header-logo">BuBu</span>
-      <nav>
-        <ul class="nav-links">
-          <li><a href="#about">About</a></li>
-          <li><a href="#gallery">Gallery</a></li>
-          <li><a href="https://x.com/BuBu_AIIlust" target="_blank" rel="noopener">𝕏</a></li>
-        </ul>
-      </nav>
-      <button class="hamburger" aria-label="メニュー">
-        <span></span><span></span><span></span>
-      </button>
-    </div>
-  </header>
+  <div class="page">
 
-  <!-- Hero -->
-  <section class="hero">
-    <div class="hero-content">
-      <h1 class="hero-name">ぶぶ / BuBu</h1>
-      <p class="hero-tagline">AI Image &amp; Video Creator</p>
-      <div class="hero-links">
-        <a href="https://x.com/BuBu_AIIlust" target="_blank" rel="noopener" class="btn btn-primary">
-          <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
-          Follow on X
+    <header class="header">
+      <h1 class="logo">ぶぶ / BuBu</h1>
+      <p class="subtitle">Portfolio Layout Variants</p>
+    </header>
+
+    <div class="cards">
+
+      <!-- v1: Standard -->
+      <div class="card">
+        <div class="card-preview preview-v1">
+          <div class="mock-nav"></div>
+          <div class="mock-title"></div>
+          <div class="mock-text"></div>
+          <div class="mock-grid">
+            <div class="mock-cell"></div>
+            <div class="mock-cell"></div>
+            <div class="mock-cell"></div>
+          </div>
+        </div>
+        <span class="card-badge">v1</span>
+        <h2 class="card-title">Standard</h2>
+        <p class="card-desc">
+          縦スクロール・中央揃えのスタンダードレイアウト。<br>
+          セクション分割でシンプルに構成。
+        </p>
+        <a href="v1/" class="card-link">
+          View
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
         </a>
-        <a href="#gallery" class="btn btn-outline">Gallery</a>
       </div>
-    </div>
-  </section>
 
-  <!-- About -->
-  <section id="about" class="about">
-    <div class="container">
-      <h2 class="section-title fade-in">About</h2>
-      <p class="about-text fade-in">
-        はじめまして、<strong>ぶぶ</strong>です。<br>
-        AIを活用したイラスト・画像・動画制作を行っているクリエイターです。<br>
-        最新のAI生成技術を用いて、幻想的でユニークなビジュアル作品を制作しています。<br>
-        作品や最新情報は <a href="https://x.com/BuBu_AIIlust" target="_blank" rel="noopener">X(@BuBu_AIIlust)</a> で発信中です。
-      </p>
-    </div>
-  </section>
-
-  <!-- Gallery -->
-  <section id="gallery" class="gallery">
-    <div class="container">
-      <h2 class="section-title fade-in">Gallery</h2>
-      <div class="gallery-grid">
-
-        <div class="gallery-item fade-in">
-          <div class="gallery-placeholder">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="m21 15-5-5L5 21"/></svg>
-            <span>Coming Soon</span>
+      <!-- v2: Sidebar -->
+      <div class="card">
+        <div class="card-preview preview-v2">
+          <div class="mock-sidebar">
+            <div class="mock-sidebar-dot"></div>
+            <div class="mock-sidebar-dot"></div>
+            <div class="mock-sidebar-dot"></div>
+          </div>
+          <div class="mock-content">
+            <div class="mock-title"></div>
+            <div class="mock-masonry">
+              <div class="mock-col">
+                <div class="mock-block"></div>
+                <div class="mock-block tall"></div>
+              </div>
+              <div class="mock-col">
+                <div class="mock-block tall"></div>
+                <div class="mock-block"></div>
+              </div>
+            </div>
           </div>
         </div>
-
-        <div class="gallery-item fade-in">
-          <div class="gallery-placeholder">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="m21 15-5-5L5 21"/></svg>
-            <span>Coming Soon</span>
-          </div>
-        </div>
-
-        <div class="gallery-item fade-in">
-          <div class="gallery-placeholder">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="m21 15-5-5L5 21"/></svg>
-            <span>Coming Soon</span>
-          </div>
-        </div>
-
-        <div class="gallery-item fade-in">
-          <div class="gallery-placeholder">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="m21 15-5-5L5 21"/></svg>
-            <span>Coming Soon</span>
-          </div>
-        </div>
-
-        <div class="gallery-item fade-in">
-          <div class="gallery-placeholder">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="m21 15-5-5L5 21"/></svg>
-            <span>Coming Soon</span>
-          </div>
-        </div>
-
-        <div class="gallery-item fade-in">
-          <div class="gallery-placeholder">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="m21 15-5-5L5 21"/></svg>
-            <span>Coming Soon</span>
-          </div>
-        </div>
-
-        <div class="gallery-item fade-in">
-          <div class="gallery-placeholder">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="m21 15-5-5L5 21"/></svg>
-            <span>Coming Soon</span>
-          </div>
-        </div>
-
-        <div class="gallery-item fade-in">
-          <div class="gallery-placeholder">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="m21 15-5-5L5 21"/></svg>
-            <span>Coming Soon</span>
-          </div>
-        </div>
-
+        <span class="card-badge">v2</span>
+        <h2 class="card-title">Sidebar Nav</h2>
+        <p class="card-desc">
+          左固定サイドバー + 右コンテンツエリア。<br>
+          Masonry風2カラムギャラリー。
+        </p>
+        <a href="v2/" class="card-link">
+          View
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </a>
       </div>
-    </div>
-  </section>
 
-  <!-- Lightbox -->
-  <div class="lightbox" id="lightbox">
-    <button class="lightbox-close" aria-label="閉じる">&times;</button>
-    <img src="" alt="拡大画像">
+      <!-- v3: Fullscreen -->
+      <div class="card">
+        <div class="card-preview preview-v3">
+          <div class="mock-section">
+            <div class="mock-circle"></div>
+          </div>
+          <div class="mock-section">
+            <div class="mock-circle" style="width:16px;"></div>
+          </div>
+          <div class="mock-section">
+            <div class="mock-carousel">
+              <div class="mock-carousel-item"></div>
+              <div class="mock-carousel-item"></div>
+              <div class="mock-carousel-item"></div>
+            </div>
+          </div>
+          <div class="mock-dots">
+            <div class="mock-dot filled"></div>
+            <div class="mock-dot"></div>
+            <div class="mock-dot"></div>
+          </div>
+        </div>
+        <span class="card-badge">v3</span>
+        <h2 class="card-title">Fullscreen Scroll</h2>
+        <p class="card-desc">
+          各セクションが画面いっぱい(100vh)のフルスクリーン。<br>
+          CSSスナップスクロール + 横カルーセルギャラリー。
+        </p>
+        <a href="v3/" class="card-link">
+          View
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </a>
+      </div>
+
+    </div>
+
+    <footer class="page-footer">
+      <a href="https://x.com/BuBu_AIIlust" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+        @BuBu_AIIlust
+      </a>
+      <p class="footer-copy">&copy; 2025 ぶぶ / BuBu. All rights reserved.</p>
+    </footer>
+
   </div>
 
-  <!-- Footer -->
-  <footer class="footer">
-    <div class="container">
-      <div class="footer-social">
-        <a href="https://x.com/BuBu_AIIlust" target="_blank" rel="noopener">
-          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
-          @BuBu_AIIlust
-        </a>
-      </div>
-      <p class="footer-copy">&copy; 2025 ぶぶ / BuBu. All rights reserved.</p>
-    </div>
-  </footer>
-
-  <script src="script.js"></script>
 </body>
 </html>
